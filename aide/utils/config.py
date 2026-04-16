@@ -86,7 +86,7 @@ def _get_next_logindex(dir: Path) -> int:
     max_index = -1
     for p in dir.iterdir():
         try:
-            if current_index := int(p.name.split("-")[0]) > max_index:
+            if (current_index := int(p.name.split("-")[0])) > max_index:
                 max_index = current_index
         except ValueError:
             pass
