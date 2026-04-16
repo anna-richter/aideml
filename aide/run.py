@@ -55,6 +55,16 @@ def journal_to_rich_tree(journal: Journal):
 
 def run():
     cfg = load_cfg()
+
+    # saving logs to file
+    cfg.log_dir.mkdir(parents=True, exist_ok=True)
+    file_handler = logging.FileHandler(cfg.log_dir / "aide.log")
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    )
+    logging.getLogger("aide").addHandler(file_handler)
+
     logger.info(f'Starting run "{cfg.exp_name}"')
 
     task_desc = load_task_desc(cfg)
